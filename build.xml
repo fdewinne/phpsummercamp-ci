@@ -76,30 +76,19 @@
         <exec command="pdepend --jdepend-xml=${project.basedir}/build/log/jdepend.xml --jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg --overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg ${project.basedir}/src" >
         </exec>
 
-        <docblox title="API Documentation" destdir="${project.basedir}/build/api">
+        <!-- <docblox title="API Documentation" destdir="${project.basedir}/build/api">
             <fileset dir="${project.basedir}/src">
                 <include name="*.php" />
             </fileset>
-        </docblox>
+        </docblox> -->
 
-        <phpcodesniffer
+        <!-- <phpcodesniffer
             standard="PEAR"
             file="${project.basedir}/src">
         <formatter type="checkstyle" outfile="${project.basedir}/build/log/checkstyle.xml"/>
-        </phpcodesniffer>
+        </phpcodesniffer> -->
 
     </target>
-
-<!--     <target name="start-selenium-server">
-        <exec executable="/bin/sh" passthru="true" dir="${project.basedir}/test/lib/">
-            <arg value="java -jar ./selenium-server.jar"/>
-        </exec>
-        <php expression="sleep(5);" />
-    </target>
-
-    <target name="stop-selenium-server">
-        <http-request url="http://localhost:4444/selenium-server/driver/?cmd=shutDownSeleniumServer" />
-    </target> -->
 
     <target name="private-build">
         <phingcall target="clean" />
@@ -115,7 +104,7 @@
         <phingcall target="install-libraries" />
         <phingcall target="integrate-database" />
         <phingcall target="test-all" />
-        <!-- <phingcall target="metrics" /> -->
+        <phingcall target="metrics" />
     </target>
 
 </project>
