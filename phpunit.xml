@@ -13,6 +13,7 @@
     <testsuites>
         <testsuite name="CIBlog Test Suite">
             <directory>./test/unit</directory>
+            <directory>./test/integration</directory>
         </testsuite>
     </testsuites>
 </phpunit>

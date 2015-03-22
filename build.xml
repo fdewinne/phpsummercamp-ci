@@ -28,7 +28,6 @@
     <target name="install-libraries">
         <exec executable="composer" passthru="true">
               <arg value="install" />
-              <arg value="--optimize-autoloader" />
         </exec>
     </target>
 
@@ -40,6 +39,11 @@
             <transaction src="${project.basedir}/data/base_structure.sql"/>
             <formatter type="plain" usefile="false" />
         </pdosqlexec>
+
+        <exec executable="${project.basedir}/bin/phinx" passthru="true">
+              <arg value="migrate" />
+              <arg value="--configuration=data/phinx.yml" />
+        </exec>
     </target>
 
     <target name="test-local">

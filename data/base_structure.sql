@@ -6,7 +6,7 @@ GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost' IDENTIFIED BY 'password' WIT
 
 USE `CIBlog`;
 
-CREATE TABLE  `Post` (
+CREATE TABLE  `post` (
 `id` INT NOT NULL ,
 `title` VARCHAR( 50 ) NOT NULL ,
 `intro` TEXT NULL ,

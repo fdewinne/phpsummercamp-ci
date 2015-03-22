@@ -10,7 +10,7 @@ class PostRepositoryTest extends PHPUnit_Extensions_Database_TestCase
 
     public function getConnection()
     {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=CIBlog', 'user', 'password');
+        $this->pdo = new \PDO('mysql:host=localhost;dbname=CIBlog', 'user', 'password');
         return $this->createDefaultDBConnection($this->pdo);
     }
 
@@ -20,11 +20,11 @@ class PostRepositoryTest extends PHPUnit_Extensions_Database_TestCase
     }
 
     public function testRetrieveEventi()
-  	{
-	    $repo = new PostRepository($this->pdo);
+    {
+        $repo = new CIBlog\PostRepository($this->pdo);
         $post = $repo->findLastPost();
 
-	    $this->assertEquals('Primo post', $post->getTitle());
+        $this->assertEquals('Primo post', $post->getTitle());
     }
 }
 
