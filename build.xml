@@ -13,7 +13,7 @@
         <!-- <delete dir="${project.basedir}/build/api" failonerror="false" /> -->
         <!-- <delete dir="${project.basedir}/build/code-browser" failonerror="false" /> -->
         <!-- <delete dir="${project.basedir}/build/coverage" failonerror="false"/> -->
-        <!-- <delete dir="${project.basedir}/build/pdepend" failonerror="false"/> -->
+        <delete dir="${project.basedir}/build/pdepend" failonerror="false"/>
         <delete dir="${project.basedir}/build/log" failonerror="false"/>
     </target>
 
@@ -21,7 +21,7 @@
         <!-- <mkdir dir="${project.basedir}/build/api" mode='0775'/> -->
         <!-- <mkdir dir="${project.basedir}/build/code-browser" mode='0775'/> -->
         <!-- <mkdir dir="${project.basedir}/build/coverage" mode='0775'/> -->
-        <!-- <mkdir dir="${project.basedir}/build/pdepend" mode='0775'/> -->
+        <mkdir dir="${project.basedir}/build/pdepend" mode='0775'/>
         <mkdir dir="${project.basedir}/build/log" mode='0775'/>
     </target>
 
