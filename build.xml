@@ -28,7 +28,6 @@
     <target name="install-libraries">
         <exec executable="composer" passthru="true">
               <arg value="install" />
-              <arg value="--no-dev" />
               <arg value="--optimize-autoloader" />
         </exec>
     </target>
