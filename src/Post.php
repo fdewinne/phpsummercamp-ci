@@ -1,5 +1,7 @@
 <?php
 
+namespace CIBlog;
+
 class Post
 {
   private $id;

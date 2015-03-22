@@ -1,9 +1,5 @@
 <?php
 
-require_once "PHPUnit/Extensions/Database/TestCase.php";
-
-require_once __DIR__.'/../../src/PostRepository.php';
-
 /**
  * @group integration
  * @group post
@@ -29,7 +25,7 @@ class PostRepositoryTest extends PHPUnit_Extensions_Database_TestCase
         $post = $repo->findLastPost();
 
 	    $this->assertEquals('Primo post', $post->getTitle());
-    }    
+    }
 }
 
 

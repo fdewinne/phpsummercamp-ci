@@ -1,10 +1,10 @@
 DROP DATABASE IF EXISTS `CIBlog`;
 
-CREATE DATABASE `CIBlog`;
+CREATE DATABASE IF NOT EXISTS `CIBlog`;
 
-GRANT ALL PRIVILEGES ON  `CIBlog` . * TO  'user'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
 
-USE `CIBlog`; 
+USE `CIBlog`;
 
 CREATE TABLE  `Post` (
 `id` INT NOT NULL ,
@@ -14,4 +14,3 @@ CREATE TABLE  `Post` (
 `image` VARCHAR( 200 ) NULL ,
 `published_at` DATETIME NOT NULL
 ) ENGINE = INNODB;
-
