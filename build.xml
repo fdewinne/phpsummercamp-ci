@@ -73,7 +73,7 @@
             <formatter type="xml" outfile="${project.basedir}/build/log/pmd.xml"/>
         </phpmd>
 
-        <exec command="pdepend --jdepend-xml=${project.basedir}/build/log/jdepend.xml --jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg --overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg ${project.basedir}/src" >
+        <exec command="bin/pdepend --jdepend-xml=${project.basedir}/build/log/jdepend.xml --jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg --overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg ${project.basedir}/src" >
         </exec>
 
         <!-- <docblox title="API Documentation" destdir="${project.basedir}/build/api">
