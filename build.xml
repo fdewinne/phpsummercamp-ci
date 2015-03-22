@@ -59,12 +59,12 @@
     </target>
 
     <target name="metrics">
-        <phpcpd>
+     <!--    <phpcpd>
            <fileset dir="${project.basedir}/src" id="filestocpd">
              <include name="*.php" />
             </fileset>
             <formatter type="pmd" outfile="${project.basedir}/build/log/pmd-cpd.xml"/>
-        </phpcpd>
+        </phpcpd> -->
 
         <phpmd>
             <fileset dir="${project.basedir}/src">
