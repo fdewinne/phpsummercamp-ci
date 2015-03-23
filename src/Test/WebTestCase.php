@@ -1,6 +1,6 @@
 <?php
 
-namespace CIBlog;
+namespace CIBlog\Test;
 
 use Symfony\Component\HttpKernel\Client;
 use Symfony\Component\HttpKernel\HttpKernel;
@@ -21,7 +21,9 @@ abstract class WebTestCase extends \PHPUnit_Extensions_Database_TestCase
 
     public function getDataSet()
     {
-        return $this->createFlatXMLDataSet(dirname(__FILE__).'/../fixtures/post.xml');
+        return $this->createFlatXMLDataSet(
+            __DIR__.'/../../test/fixtures/post.xml'
+        );
     }
 
     public function setUp()

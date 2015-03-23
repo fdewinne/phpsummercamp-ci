@@ -1,6 +1,6 @@
 <?php
 
-use CIBlog\Test;
+use CIBlog\Test\WebTestCase;
 
 /**
  * @group functional
@@ -18,13 +18,11 @@ class HomepageTest extends WebTestCase
     return $app;
   }
 
-  public function testHomepageContainsLatestFivePost()
+  public function testHomepageContainsAPost()
   {
     $client = $this->createClient();
     $crawler = $client->request('GET', '/');
 
-    $this->assertTrue($client->getResponse()->isOk());
-    $this->assertCount(1, $crawler->filter('h1:contains("Contact us")'));
-    $this->assertCount(1, $crawler->filter('form'));
+    $this->assertEquals('CIBlog', $crawler->filter('h1')->text());
   }
 }

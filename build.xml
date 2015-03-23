@@ -10,16 +10,12 @@
             </fileset>
         </delete>
 
-        <!-- <delete dir="${project.basedir}/build/code-browser" failonerror="false" /> -->
-        <delete dir="${project.basedir}/build/api" failonerror="false" />
         <delete dir="${project.basedir}/build/coverage" failonerror="false"/>
         <delete dir="${project.basedir}/build/pdepend" failonerror="false"/>
         <delete dir="${project.basedir}/build/log" failonerror="false"/>
     </target>
 
     <target name="prepare">
-        <!-- <mkdir dir="${project.basedir}/build/code-browser" mode='0775'/> -->
-        <mkdir dir="${project.basedir}/build/api" mode='0775'/>
         <mkdir dir="${project.basedir}/build/coverage" mode='0775'/>
         <mkdir dir="${project.basedir}/build/pdepend" mode='0775'/>
         <mkdir dir="${project.basedir}/build/log" mode='0775'/>
@@ -70,12 +66,6 @@
 
         <exec command="${project.basedir}/bin/pdepend --jdepend-xml=${project.basedir}/build/log/jdepend.xml --jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg --overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg ${project.basedir}/src" >
         </exec>
-
-        <docblox title="API Documentation" destdir="${project.basedir}/build/api">
-            <fileset dir="${project.basedir}/src">
-                <include name="*.php" />
-            </fileset>
-        </docblox>
     </target>
 
     <target name="private-build">

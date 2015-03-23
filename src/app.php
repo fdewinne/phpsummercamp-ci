@@ -1,5 +1,6 @@
 <?php
 
+use CIBlog\PostRepository;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,12 +14,12 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get("/", function (Application $app) {
 
-    // $pdo = new PDO('mysql:host=localhost;dbname=CIBlog', 'user', 'password');
-    // $pr    = new PostRepository($pdo);
-    // $post  = $pr->findLastPost();
+    $pdo = new PDO('mysql:host=localhost;dbname=CIBlog', 'user', 'password');
+    $pr    = new PostRepository($pdo);
+    $post  = $pr->findLastPost();
 
     return $app['twig']->render('index.html.twig', array(
-        'name' => $name,
+        'post' => $post,
     ));
 });
 
