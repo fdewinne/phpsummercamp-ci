@@ -1,12 +1,22 @@
 
+body
+{
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
 .header h2
 {
   padding-top: 8px;
+  margin-bottom: 10px;
 }
 
 .container
 {
-  border-right: 1px solid #DDDDDD;
-  margin-left: 20%;
-  margin-right: 20%;
+}
+
+.post {
+   background-color: #CCCCCC;
+   margin: 5px;
 }

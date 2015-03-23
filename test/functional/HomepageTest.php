@@ -13,7 +13,7 @@ class HomepageTest extends WebTestCase
   {
     $app = require __DIR__.'/../../src/app.php';
     $app['debug'] = true;
-    // $app['exception_handler']->disable();
+    $app['exception_handler']->disable();
 
     return $app;
   }
@@ -24,5 +24,6 @@ class HomepageTest extends WebTestCase
     $crawler = $client->request('GET', '/');
 
     $this->assertEquals('CIBlog', $crawler->filter('h1')->text());
+    $this->assertCount(2, $crawler->filter('div.post'));
   }
 }

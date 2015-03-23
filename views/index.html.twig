@@ -3,6 +3,13 @@
 {% block content %}
 <h1 class="prepend-1">CIBlog</h1>
 <h2>Latest Post</h2>
-<div>
+<div class="container">
+{% for post in posts %}
+        <div class="post">
+            <h3>{{ post.title }}</h3>
+
+            <p>{{ post.body }}</p>
+        </div>
+{% endfor %}
 </div>
 {% endblock %}

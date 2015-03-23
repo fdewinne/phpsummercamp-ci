@@ -23,4 +23,24 @@ class PostRepository
 
     return $post;
   }
+
+  public function findAll()
+  {
+    $q = sprintf("SELECT * FROM post ORDER BY published_at DESC");
+
+    $result = $this->pdo
+                   ->query($q)
+                   ->fetchAll(\PDO::FETCH_ASSOC);
+
+    $res = array();
+
+    foreach ($result as $row) {
+      $post = new Post();
+      $post->fromArray($row);
+
+      $res[] = $post;
+    }
+
+    return $res;
+  }
 }

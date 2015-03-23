@@ -12,14 +12,22 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 
+$app['db'] = $app->share(function($app) {
+    return new PDO(
+        'mysql:host=localhost;dbname=CIBlog',
+        'user',
+        'password'
+    );
+});
+
+
 $app->get("/", function (Application $app) {
 
-    $pdo = new PDO('mysql:host=localhost;dbname=CIBlog', 'user', 'password');
-    $pr    = new PostRepository($pdo);
-    $post  = $pr->findLastPost();
+    $pr    = new PostRepository($app['db']);
+    $posts  = $pr->findAll();
 
     return $app['twig']->render('index.html.twig', array(
-        'post' => $post,
+        'posts' => $posts,
     ));
 });
 
