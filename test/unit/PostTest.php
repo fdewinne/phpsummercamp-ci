@@ -12,7 +12,8 @@ class PostTest extends PHPUnit_Framework_TestCase
 			'intro'			=> 'intro del post',
 			'body'			=> 'il body',
 			'image'			=> 'nice.jpg',
-			'published_at'	=> new DateTime('now')
+			'published_at'	=> new DateTime('now'),
+			'author'	=> 'pippo'
 		);
 
 		$post = new CIBlog\Post();
