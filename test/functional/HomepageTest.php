@@ -1,31 +1,30 @@
 <?php
 
+use CIBlog\Test;
+
 /**
  * @group functional
  * @group post
 */
-class HomepageTest extends PHPUnit_Extensions_SeleniumTestCase
+class HomepageTest extends WebTestCase
 {
 
-  protected function setUp()
+  public function createApplication()
   {
-    $this->setBrowser('*firefox');
-    $this->setBrowserUrl('http://ciblog.local/');
+    $app = require __DIR__.'/../../src/app.php';
+    $app['debug'] = true;
+    // $app['exception_handler']->disable();
+
+    return $app;
   }
 
   public function testHomepageContainsLatestFivePost()
   {
-    $this->open("/");
-    
-   	$this->waitForTextPresent('Post');
-   	$this->assertTitle('CIBlog');
-    $this->assertEquals("Primo post", $this->getText("//div[@id='main']/div[1]/h2"));
+    $client = $this->createClient();
+    $crawler = $client->request('GET', '/');
 
-    // $this->assertEquals("Primo Post", $this->getText("//div[@id='main']/div[2]/h2"));
-    // $this->assertEquals("Primo Post", $this->getText("//div[@id='main']/div[3]/h2"));
-    // $this->assertEquals("Primo Post", $this->getText("//div[@id='main']/div[4]/h2"));
-    // $this->assertEquals("Primo Post", $this->getText("//div[@id='main']/div[5]/h2"));
-     
+    $this->assertTrue($client->getResponse()->isOk());
+    $this->assertCount(1, $crawler->filter('h1:contains("Contact us")'));
+    $this->assertCount(1, $crawler->filter('form'));
   }
-
 }
