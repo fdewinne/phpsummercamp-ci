@@ -80,6 +80,8 @@
     </target>
 
     <target name="deploy">
+        <chmod file="${project.basedir}/config/deploy_key" mode="0600" />
+
         <filesync
             sourcedir="${project.basedir}/"
             destinationdir="vagrant@192.168.33.10:/var/www/staging"
