@@ -1,0 +1,15 @@
+tests
+.DS_Store
+build
+vendor
+bin
+build.xml
+build.properties
+phpunit.xml
+Vagrantfile
+README.md
+.git
+.vagrant
+logs/*
+test
+config

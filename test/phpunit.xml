@@ -10,11 +10,15 @@
     stopOnFailure               = "false"
     syntaxCheck                 = "false">
 
+    <php>
+        <env name="APPENV" value="development"/>
+    </php>
+
     <testsuites>
         <testsuite name="CIBlog Test Suite">
-            <directory>./test/unit</directory>
-            <directory>./test/integration</directory>
-            <directory>./test/functional</directory>
+            <directory>./unit</directory>
+            <directory>./integration</directory>
+            <directory>./functional</directory>
         </testsuite>
     </testsuites>
 

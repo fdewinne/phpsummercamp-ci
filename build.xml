@@ -5,7 +5,7 @@
 
     <target name="clean">
         <delete>
-            <fileset dir="${project.basedir}/log">
+            <fileset dir="${project.basedir}/logs">
                 <include name="*.log" />
             </fileset>
         </delete>
@@ -43,12 +43,13 @@
     </target>
 
     <target name="test-local">
-        <exec executable="${project.basedir}/bin/phpunit" passthru="true">
+        <exec executable="${project.basedir}/bin/phpunit -c test" passthru="true">
         </exec>
     </target>
 
     <target name="test-all">
         <exec executable="${project.basedir}/bin/phpunit" passthru="true">
+              <arg value="--configuration=test/" />
               <arg value="--log-junit=build/log/junit.xml" />
               <arg value="--coverage-html=build/log/coverage" />
               <arg value="--coverage-clover=build/log/coverage.xml" />
@@ -63,7 +64,11 @@
             <formatter type="xml" outfile="${project.basedir}/build/log/pmd.xml"/>
         </phpmd>
 
-        <exec command="${project.basedir}/bin/pdepend --jdepend-xml=${project.basedir}/build/log/jdepend.xml --jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg --overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg ${project.basedir}/src" >
+        <exec command="${project.basedir}/bin/pdepend" >
+            <arg value="--jdepend-xml=${project.basedir}/build/log/jdepend.xml" />
+            <arg value="--jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg" />
+            <arg value="--overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg" />
+            <arg value="${project.basedir}/src" />
         </exec>
     </target>
 
@@ -77,6 +82,34 @@
            </fileset>
         </phpdoc2>
     </target>
+
+    <target name="deploy">
+        <filesync
+            sourcedir="${project.basedir}/"
+            destinationdir="vagrant@192.168.33.10:/var/www/staging"
+            dryrun="false"
+            itemizechanges="true"
+            verbose="true"
+            checksum="true"
+            identityFile="${project.basedir}/config/deploy_key.pub"
+            excludeFile="${project.basedir}/config/deploy_exclude"
+        />
+
+        <ssh
+            username="vagrant"
+            pubkeyfile="${project.basedir}/config/deploy_key.pub"
+            privkeyfile="${project.basedir}/config/deploy_key"
+            host="192.168.33.10"
+            command="cd /var/www/staging &amp;&amp; composer install -v -o --no-dev"
+        />
+
+        <exec executable="${project.basedir}/bin/phinx" passthru="true">
+              <arg value="migrate" />
+              <arg value="--environment=staging" />
+              <arg value="--configuration=data/phinx.yml" />
+        </exec>
+    </target>
+
 
     <target name="build-private">
         <phingcall target="clean" />
