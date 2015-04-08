@@ -57,18 +57,14 @@
     </target>
 
     <target name="metrics">
-        <phpmd>
+<!--         <phpmd>
             <fileset dir="${project.basedir}/src">
                 <include name="*.php" />
              </fileset>
             <formatter type="xml" outfile="${project.basedir}/build/log/pmd.xml"/>
-        </phpmd>
+        </phpmd> -->
 
-        <exec command="${project.basedir}/bin/pdepend" >
-            <arg value="--jdepend-xml=${project.basedir}/build/log/jdepend.xml" />
-            <arg value="--jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg" />
-            <arg value="--overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg" />
-            <arg value="${project.basedir}/src" />
+        <exec command="${project.basedir}/bin/pdepend --jdepend-xml=${project.basedir}/build/log/jdepend.xml --jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg --overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg ${project.basedir}/src">
         </exec>
     </target>
 
