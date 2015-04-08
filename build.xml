@@ -10,14 +10,12 @@
             </fileset>
         </delete>
 
-        <delete dir="${project.basedir}/build/coverage" failonerror="false"/>
         <delete dir="${project.basedir}/build/pdepend" failonerror="false"/>
         <delete dir="${project.basedir}/build/log" failonerror="false"/>
         <delete dir="${project.basedir}/build/api" failonerror="false"/>
     </target>
 
     <target name="prepare">
-        <mkdir dir="${project.basedir}/build/coverage" mode='0775'/>
         <mkdir dir="${project.basedir}/build/pdepend" mode='0775'/>
         <mkdir dir="${project.basedir}/build/log" mode='0775'/>
         <mkdir dir="${project.basedir}/build/api" mode='0775'/>
@@ -52,7 +50,7 @@
     <target name="test-all">
         <exec executable="${project.basedir}/bin/phpunit" passthru="true">
               <arg value="--log-junit=build/log/junit.xml" />
-              <arg value="--coverage-html=build/coverage" />
+              <arg value="--coverage-html=build/log/coverage" />
               <arg value="--coverage-clover=build/log/coverage.xml" />
         </exec>
     </target>
