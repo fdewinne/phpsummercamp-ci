@@ -15,7 +15,8 @@ abstract class WebTestCase extends \PHPUnit_Extensions_Database_TestCase
 
     public function getConnection()
     {
-        $this->pdo = new \PDO('mysql:host=localhost;dbname=CIBlog', 'user', 'password');
+        $this->pdo = $this->app['db'];
+
         return $this->createDefaultDBConnection($this->pdo);
     }
 
@@ -28,9 +29,9 @@ abstract class WebTestCase extends \PHPUnit_Extensions_Database_TestCase
 
     public function setUp()
     {
-        parent::setUp();
-
         $this->app = $this->createApplication();
+
+        parent::setUp();
     }
 
     public function createClient(array $server = array())
