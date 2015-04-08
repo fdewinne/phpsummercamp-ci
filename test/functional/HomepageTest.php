@@ -8,7 +8,6 @@ use CIBlog\Test\WebTestCase;
 */
 class HomepageTest extends WebTestCase
 {
-
   public function createApplication()
   {
     $app = require __DIR__.'/../../src/app.php';
