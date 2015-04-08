@@ -87,7 +87,7 @@
             itemizechanges="true"
             verbose="true"
             checksum="true"
-            identityFile="${project.basedir}/config/deploy_key.pub"
+            identityFile="${project.basedir}/config/deploy_key"
             excludeFile="${project.basedir}/config/deploy_exclude"
         />
 
