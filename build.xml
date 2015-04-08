@@ -95,6 +95,7 @@
         <phingcall target="integrate-database" />
         <phingcall target="test-all" />
         <phingcall target="metrics" />
+        <phingcall target="docs" />
     </target>
 
 </project>
