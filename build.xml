@@ -8,17 +8,20 @@
             </fileset>
         </delete>
 
+        <delete dir="${project.basedir}/build/log" failonerror="false" />
         <delete dir="${project.basedir}/build/api" failonerror="false" />
     </target>
 
     <target name="prepare" description="prepare env for new build">
 
+        <mkdir dir="${project.basedir}/build/log" mode='0775'/>
         <mkdir dir="${project.basedir}/build/api" mode='0775'/>
     </target>
 
     <target name="test" description="all app test">
         <exec executable="${project.basedir}/bin/phpunit" passthru="true">
           <arg value="--configuration=test/" />
+          <arg value="--log-junit=build/log/junit.xml" />
         </exec>
     </target>
 
