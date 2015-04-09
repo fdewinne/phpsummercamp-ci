@@ -1,5 +1,4 @@
 .DS_Store
-logs/*.log
 build/*
 .vagrant/
 bin/.gitkeep
