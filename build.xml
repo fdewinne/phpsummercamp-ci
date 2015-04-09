@@ -1,6 +1,8 @@
 <?xml version="1.0"  encoding="UTF-8" ?>
 <project name="CIBlog" basedir="." default="build">
 
+    <property file="build.properties" />
+
     <target name="clean" description="clean env">
         <delete>
             <fileset dir="${project.basedir}/logs">
@@ -25,10 +27,27 @@
         </exec>
     </target>
 
+    <target name="install-libraries">
+        <exec executable="composer" passthru="true">
+              <arg value="install" />
+        </exec>
+    </target>
+
+    <target name="integrate-database" >
+        <pdosqlexec url="mysql:host=${db.host}"
+                    userid="${db.username}"
+                    password="${db.password}">
+
+            <transaction src="${project.basedir}/data/base_structure.sql"/>
+            <formatter type="plain" usefile="false" />
+        </pdosqlexec>
+    </target>
 
     <target name="build" description="main build">
         <phingcall target="clean" />
         <phingcall target="prepare" />
+        <phingcall target="install-libraries" />
+        <phingcall target="integrate-database" />
         <phingcall target="test" />
     </target>
 </project>
