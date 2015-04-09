@@ -8,11 +8,17 @@
             </fileset>
         </delete>
 
-        <!-- <delete dir="${project.basedir}/build/pdepend" failonerror="false"/> -->
+        <delete dir="${project.basedir}/build/api" failonerror="false" />
+    </target>
+
+    <target name="prepare" description="prepare env for new build">
+
+        <mkdir dir="${project.basedir}/build/api" mode='0775'/>
     </target>
 
     <target name="build" description="main build">
         <echo msg="first build" />
         <phingcall target="clean" />
+        <phingcall target="prepare" />
     </target>
 </project>
