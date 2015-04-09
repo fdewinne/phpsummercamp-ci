@@ -34,6 +34,15 @@
         </exec>
     </target>
 
+    <target name="metric">
+        <phpmd>
+            <fileset dir="${project.basedir}/src">
+                <include name="*.php" />
+             </fileset>
+            <formatter type="xml" outfile="${project.basedir}/build/log/pmd.xml"/>
+        </phpmd>
+    </target>
+
     <target name="install-libraries">
         <exec executable="composer" passthru="true">
               <arg value="install" />
@@ -56,6 +65,7 @@
         </exec>
     </target>
 
+
     <target name="build-private" description="private build">
         <phingcall target="clean" />
         <phingcall target="prepare" />
@@ -70,6 +80,7 @@
         <phingcall target="install-libraries" />
         <phingcall target="integrate-database" />
         <phingcall target="test-ci" />
+        <phingcall target="metrics" />
     </target>
 
 </project>
