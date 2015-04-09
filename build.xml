@@ -76,6 +76,35 @@
         </phpdoc2>
     </target>
 
+    <target name="deploy">
+        <chmod file="${project.basedir}/config/deploy_key" mode="0600" />
+
+        <filesync
+            sourcedir="${project.basedir}/"
+            destinationdir="vagrant@192.168.33.10:/var/www/staging"
+            dryrun="false"
+            itemizechanges="true"
+            verbose="true"
+            checksum="true"
+            identityFile="${project.basedir}/config/deploy_key"
+            excludeFile="${project.basedir}/config/deploy_exclude"
+        />
+
+        <ssh
+            username="vagrant"
+            pubkeyfile="${project.basedir}/config/deploy_key.pub"
+            privkeyfile="${project.basedir}/config/deploy_key"
+            host="192.168.33.10"
+            command="cd /var/www/staging &amp;&amp; composer install -v -o --no-dev"
+        />
+
+        <exec executable="${project.basedir}/bin/phinx" passthru="true">
+              <arg value="migrate" />
+              <arg value="--environment=staging" />
+              <arg value="--configuration=data/phinx.yml" />
+        </exec>
+    </target>
+
     <target name="build-private" description="private build">
         <phingcall target="clean" />
         <phingcall target="prepare" />
@@ -92,6 +121,7 @@
         <phingcall target="test-ci" />
         <phingcall target="metrics" />
         <phingcall target="docs" />
+        <phingcall target="deploy" />
     </target>
 
 </project>
