@@ -21,7 +21,7 @@ class PostTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('titolo del post', $post->getTitle());
 
 		$this->assertEquals(
-			'il body',
+			'il body sdfsdf',
 			$post->getBody()
 		);
 	}
