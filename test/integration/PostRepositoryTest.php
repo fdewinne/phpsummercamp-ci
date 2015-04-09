@@ -24,12 +24,25 @@ class PostRepositoryTest extends PHPUnit_Extensions_Database_TestCase
         return $this->createFlatXMLDataSet(dirname(__FILE__).'/../fixtures/post.xml');
     }
 
-    public function testRetrieveEventi()
+    public function testRetrieveLastPost()
     {
         $repo = new CIBlog\PostRepository($this->pdo);
         $post = $repo->findLastPost();
 
         $this->assertEquals('Primo post', $post->getTitle());
+    }
+
+    /**
+     * @group findall
+     */
+    public function testFindAll()
+    {
+        $repo = new CIBlog\PostRepository($this->pdo);
+        $posts = $repo->findAll();
+
+        $this->assertCount(2, $posts);
+        $this->assertInstanceOf('CIBlog\Post', $posts[0]);
+        $this->assertInstanceOf('CIBlog\Post', $posts[1]);
     }
 }
 
