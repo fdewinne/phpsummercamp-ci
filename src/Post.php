@@ -10,6 +10,7 @@ class Post
   private $body;
   private $image;
   private $published_at;
+  private $author;
 
   public function fromArray(array $data)
   {
@@ -17,6 +18,7 @@ class Post
     $this->intro              = $data['intro'];
     $this->body               = $data['body'];
     $this->image              = $data['image'];
+    $this->author             = $data['author'];
     $this->published_at       = $data['published_at'];
   }
 

@@ -12,6 +12,7 @@ class PostTest extends PHPUnit_Framework_TestCase
 			'intro'			=> 'intro del post',
 			'body'			=> 'il body',
 			'image'			=> 'nice.jpg',
+			'author'		=> 'John Doe',
 			'published_at'	=> new DateTime('now'),
 		);
 
@@ -23,6 +24,11 @@ class PostTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(
 			'il body',
 			$post->getBody()
+		);
+
+		$this->assertEquals(
+			'John Doe',
+			$post->getAuthor()
 		);
 	}
 

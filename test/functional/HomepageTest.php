@@ -24,5 +24,11 @@ class HomepageTest extends WebTestCase
 
     $this->assertEquals('CIBlog', $crawler->filter('h1')->text());
     $this->assertCount(2, $crawler->filter('div.post'));
+    $this->assertCount(2, $crawler->filter('.author'));
+
+    $this->assertEquals(
+      'Jane Doe',
+      $crawler->filter('.author')->text()
+    );
   }
 }

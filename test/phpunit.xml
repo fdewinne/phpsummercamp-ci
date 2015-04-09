@@ -18,7 +18,7 @@
         <testsuite name="CIBlog Test Suite">
             <directory>./unit</directory>
             <directory>./integration</directory>
-            <!-- <directory>./functional</directory> -->
+            <directory>./functional</directory>
         </testsuite>
     </testsuites>
 
