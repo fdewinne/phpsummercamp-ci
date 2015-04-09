@@ -17,7 +17,6 @@
     </target>
 
     <target name="build" description="main build">
-        <echo msg="first build" />
         <phingcall target="clean" />
         <phingcall target="prepare" />
     </target>
