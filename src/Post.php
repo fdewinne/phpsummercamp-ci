@@ -51,5 +51,45 @@ class Post
   {
     return $this->author;
   }
+
+  public function foo($a, $b, $c, $d, $e, $f, $g, $h)
+  {
+    return 'ciao';
+  }
+
+  public function boh()
+  {
+    if(false) {
+      return;
+    }
+
+    if(false) {
+      return;
+    }
+
+    if(false) {
+      return;
+    }
+
+    if(false) {
+      return;
+    }
+
+    if(false) {
+      return;
+    }
+
+    if(false) {
+      return;
+    }
+
+    if(false) {
+      return;
+    }
+
+    if(false) {
+      return;
+    }
+  }
 }
 ?>
