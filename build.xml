@@ -1,6 +1,18 @@
 <?xml version="1.0"  encoding="UTF-8" ?>
 <project name="CIBlog" basedir="." default="build">
-    <target name="build">
+
+    <target name="clean" description="clean env">
+        <delete>
+            <fileset dir="${project.basedir}/logs">
+                <include name="*.log" />
+            </fileset>
+        </delete>
+
+        <!-- <delete dir="${project.basedir}/build/pdepend" failonerror="false"/> -->
+    </target>
+
+    <target name="build" description="main build">
         <echo msg="first build" />
+        <phingcall target="clean" />
     </target>
 </project>
