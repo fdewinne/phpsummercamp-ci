@@ -19,5 +19,17 @@ class PostTest extends PHPUnit_Framework_TestCase
 		$post->fromArray($data);
 
 		$this->assertEquals('titolo del post', $post->getTitle());
+
+		$this->assertEquals(
+			'il body',
+			$post->getBody()
+		);
+	}
+
+	public function testConstructAPost()
+	{
+		$post = new CIBlog\Post();
+
+		$this->assertInstanceOf('CIBlog\Post', $post);
 	}
 }

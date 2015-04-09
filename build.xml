@@ -16,8 +16,16 @@
         <mkdir dir="${project.basedir}/build/api" mode='0775'/>
     </target>
 
+    <target name="test" description="all app test">
+        <exec executable="${project.basedir}/bin/phpunit" passthru="true">
+          <arg value="--configuration=test/" />
+        </exec>
+    </target>
+
+
     <target name="build" description="main build">
         <phingcall target="clean" />
         <phingcall target="prepare" />
+        <phingcall target="test" />
     </target>
 </project>
