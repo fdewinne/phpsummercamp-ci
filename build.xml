@@ -65,6 +65,16 @@
         </exec>
     </target>
 
+    <target name="docs">
+        <phpdoc2 title="API Documentation"
+                 destdir="${project.basedir}/build/api"
+                 template="clean">
+
+           <fileset dir="${project.basedir}/src">
+              <include name="*.php" />
+           </fileset>
+        </phpdoc2>
+    </target>
 
     <target name="build-private" description="private build">
         <phingcall target="clean" />
@@ -81,6 +91,7 @@
         <phingcall target="integrate-database" />
         <phingcall target="test-ci" />
         <phingcall target="metrics" />
+        <phingcall target="docs" />
     </target>
 
 </project>
