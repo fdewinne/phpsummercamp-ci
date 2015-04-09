@@ -22,7 +22,15 @@
     <target name="test" description="all app test">
         <exec executable="${project.basedir}/bin/phpunit" passthru="true">
           <arg value="--configuration=test/" />
+        </exec>
+    </target>
+
+    <target name="test-ci" description="all app test">
+        <exec executable="${project.basedir}/bin/phpunit" passthru="true">
+          <arg value="--configuration=test/" />
           <arg value="--log-junit=build/log/junit.xml" />
+          <arg value="--coverage-html=build/log/coverage" />
+          <arg value="--coverage-clover=build/log/coverage.xml" />
         </exec>
     </target>
 
@@ -47,11 +55,21 @@
               <arg value="--configuration=data/phinx.yml" />
         </exec>
     </target>
-    <target name="build" description="main build">
+
+    <target name="build-private" description="private build">
         <phingcall target="clean" />
         <phingcall target="prepare" />
         <phingcall target="install-libraries" />
         <phingcall target="integrate-database" />
         <phingcall target="test" />
     </target>
+
+    <target name="build" description="main build">
+        <phingcall target="clean" />
+        <phingcall target="prepare" />
+        <phingcall target="install-libraries" />
+        <phingcall target="integrate-database" />
+        <phingcall target="test-ci" />
+    </target>
+
 </project>
