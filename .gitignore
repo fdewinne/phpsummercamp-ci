@@ -1,3 +1,6 @@
 .DS_Store
-log/*.log
 build/*
+.vagrant/
+bin/.gitkeep
+logs/*.log
+vendor/
