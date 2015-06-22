@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "civm"
+  config.vm.box = "workshopci"
   config.vm.hostname = "workshopci"
 
   # Create a forwarded port mapping which allows access to a specific port
