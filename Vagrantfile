@@ -2,12 +2,9 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "civm"
+  config.vm.hostname = "workshopci"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -16,13 +13,13 @@ Vagrant.configure(2) do |config|
 
   config.vm.network "private_network", ip: "192.168.33.10"
 
-  config.ssh.forward_agent = true
-  config.ssh.password = 'vagrant'
+  config.vm.synced_folder ".", "/var/www/ciblog", type: "nfs", id: "vagrant-root",  mount_options: ['rw', 'vers=3', 'tcp', 'fsc']
 
-  config.vm.synced_folder "./", "/var/www/CIBlog"
+  config.ssh.forward_agent = true
 
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "4096"
-    vb.cpus = "4"
+    vb.memory = "2048"
+    vb.cpus = "2"
+    vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root","1"]
   end
 end
