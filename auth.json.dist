@@ -1,5 +1,0 @@
-{ "config":
-    "github-oauth": {
-        "github.com": ""
-    }
-}

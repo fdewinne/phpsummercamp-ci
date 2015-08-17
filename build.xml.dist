@@ -21,6 +21,7 @@
         <mkdir dir="${project.basedir}/build/api" mode='0775'/>
     </target>
 
+
     <target name="install-libraries">
         <exec executable="composer" passthru="true">
               <arg value="install" />
@@ -129,3 +130,62 @@
     </target>
 
 </project>
+
+<!--
+<?xml version="1.0"  encoding="UTF-8" ?>
+<project name="CIBlog" basedir="." default="build">
+   <property file="build.properties" />
+
+    <target name="build">
+        <phingcall target="clean" />
+        <phingcall target="prepare" />
+        <phingcall target="composer" />
+        <phingcall target="integrate-db" />
+        <phingcall target="runtest" />
+        <phingcall target="metrics" />
+    </target>
+
+    <target name="clean">
+        <delete dir="${project.basedir}/build/log" failonerror="false"/>
+        <delete dir="${project.basedir}/build/pdepend" failonerror="false"/>
+    </target>
+
+    <target name="prepare">
+        <mkdir dir="${project.basedir}/build/log" mode='0775'/>
+        <mkdir dir="${project.basedir}/build/pdepend" mode='0775'/>
+    </target>
+
+    <target name="composer">
+        <exec executable="composer" passthru="true">
+           <arg value="install" />
+        </exec>
+    </target>
+
+    <target name="integrate-db">
+        <exec dir='.' command="mysql -uroot &lt; ${project.basedir}/data/base_structure.sql">
+        </exec>
+
+        <exec executable="${project.basedir}/bin/phinx" passthru="true">
+              <arg value="migrate" />
+              <arg value="--configuration=data/phinx.yml" />
+        </exec>
+    </target>
+
+    <target name="runtest">
+        <exec executable="${project.basedir}/bin/phpunit" passthru="true">
+            <arg value="--debug" />
+            <arg value="--configuration=test/" />
+            <arg value="--log-junit=build/log/junit.xml" />
+            <arg value="--coverage-html=build/log/coverage" />
+            <arg value="--coverage-clover=build/log/coverage.xml" />
+        </exec>
+    </target>
+
+    <target name="metrics">
+        <exec command="bin/phpmd src xml codesize,cleancode,naming --reportfile build/log/pmd.xml">
+        </exec>
+
+        <exec command="${project.basedir}/bin/pdepend --jdepend-xml=${project.basedir}/build/log/jdepend.xml --jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg --overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg ${project.basedir}/src">
+        </exec>
+    </target>
+</project> -->
