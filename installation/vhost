@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+    ServerName ci.phpsc
+
+    DocumentRoot /var/www/summercamp/workshops/ci/web
+    DirectoryIndex index.php
+
+    <Directory /var/www/summercamp/workshops/ci/web>
+        Options FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+</VirtualHost>

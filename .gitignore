@@ -5,3 +5,12 @@ build/*
 bin/.gitkeep
 logs/*.log
 vendor/
+bin/dbunit
+bin/jsonlint
+bin/pdepend
+bin/phinx
+bin/phpdoc
+bin/phpdoc.php
+bin/phpmd
+bin/phpunit
+bin/validate-json
