@@ -1,4 +1,4 @@
-DROP TABLE `post` IF EXISTS;
+DROP TABLE IF EXISTS `post`;
 
 CREATE TABLE `post` (
 `id` INT NOT NULL ,
