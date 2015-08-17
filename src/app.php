@@ -19,11 +19,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 
 $app['db'] = $app->share(function($app) {
 
-    return new PDO(
-        'mysql:host=localhost;dbname=CIBlog_'. $app['env'],
-        'user',
-        'password'
-    );
+    return new PDO('mysql:host=localhost;dbname=ci', 'summer', 'camp');
 });
 
 
