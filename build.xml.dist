@@ -1,7 +1,6 @@
 <?xml version="1.0"  encoding="UTF-8" ?>
 
 <project name="CIBlog" basedir="." default="build">
-   <property file="build.properties" />
 
     <target name="clean">
         <delete>
@@ -29,13 +28,8 @@
     </target>
 
     <target name="integrate-database" >
-        <pdosqlexec url="mysql:host=${db.host}"
-                    userid="${db.username}"
-                    password="${db.password}">
-
-            <transaction src="${project.basedir}/data/base_structure.sql"/>
-            <formatter type="plain" usefile="false" />
-        </pdosqlexec>
+        <exec dir='.' command="mysql -usummer -pcamp &lt; ${project.basedir}/data/base_structure.sql">
+        </exec>
 
         <exec executable="${project.basedir}/bin/phinx" passthru="true">
               <arg value="migrate" />
@@ -58,18 +52,15 @@
     </target>
 
     <target name="metrics">
-        <phpmd>
-            <fileset dir="${project.basedir}/src">
-                <include name="*.php" />
-             </fileset>
-            <formatter type="xml" outfile="${project.basedir}/build/log/pmd.xml"/>
-        </phpmd>
+        <exec command="bin/phpmd src xml codesize,cleancode,naming --reportfile build/log/pmd.xml">
+        </exec>
 
         <exec command="${project.basedir}/bin/pdepend --jdepend-xml=${project.basedir}/build/log/jdepend.xml --jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg --overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg ${project.basedir}/src">
         </exec>
     </target>
 
     <target name="docs">
+        <includepath classpath="./vendor/phpdocumentor" />
         <phpdoc2 title="API Documentation"
                  destdir="${project.basedir}/build/api"
                  template="clean">
@@ -79,36 +70,6 @@
            </fileset>
         </phpdoc2>
     </target>
-
-    <target name="deploy">
-        <chmod file="${project.basedir}/config/deploy_key" mode="0600" />
-
-        <filesync
-            sourcedir="${project.basedir}/"
-            destinationdir="vagrant@192.168.33.10:/var/www/staging"
-            dryrun="false"
-            itemizechanges="true"
-            verbose="true"
-            checksum="true"
-            identityFile="${project.basedir}/config/deploy_key"
-            excludeFile="${project.basedir}/config/deploy_exclude"
-        />
-
-        <ssh
-            username="vagrant"
-            pubkeyfile="${project.basedir}/config/deploy_key.pub"
-            privkeyfile="${project.basedir}/config/deploy_key"
-            host="192.168.33.10"
-            command="cd /var/www/staging &amp;&amp; composer install -v -o --no-dev"
-        />
-
-        <exec executable="${project.basedir}/bin/phinx" passthru="true">
-              <arg value="migrate" />
-              <arg value="--environment=staging" />
-              <arg value="--configuration=data/phinx.yml" />
-        </exec>
-    </target>
-
 
     <target name="build-private">
         <phingcall target="clean" />
@@ -126,66 +87,6 @@
         <phingcall target="test-all" />
         <phingcall target="metrics" />
         <phingcall target="docs" />
-        <phingcall target="deploy" />
     </target>
 
 </project>
-
-<!--
-<?xml version="1.0"  encoding="UTF-8" ?>
-<project name="CIBlog" basedir="." default="build">
-   <property file="build.properties" />
-
-    <target name="build">
-        <phingcall target="clean" />
-        <phingcall target="prepare" />
-        <phingcall target="composer" />
-        <phingcall target="integrate-db" />
-        <phingcall target="runtest" />
-        <phingcall target="metrics" />
-    </target>
-
-    <target name="clean">
-        <delete dir="${project.basedir}/build/log" failonerror="false"/>
-        <delete dir="${project.basedir}/build/pdepend" failonerror="false"/>
-    </target>
-
-    <target name="prepare">
-        <mkdir dir="${project.basedir}/build/log" mode='0775'/>
-        <mkdir dir="${project.basedir}/build/pdepend" mode='0775'/>
-    </target>
-
-    <target name="composer">
-        <exec executable="composer" passthru="true">
-           <arg value="install" />
-        </exec>
-    </target>
-
-    <target name="integrate-db">
-        <exec dir='.' command="mysql -uroot &lt; ${project.basedir}/data/base_structure.sql">
-        </exec>
-
-        <exec executable="${project.basedir}/bin/phinx" passthru="true">
-              <arg value="migrate" />
-              <arg value="--configuration=data/phinx.yml" />
-        </exec>
-    </target>
-
-    <target name="runtest">
-        <exec executable="${project.basedir}/bin/phpunit" passthru="true">
-            <arg value="--debug" />
-            <arg value="--configuration=test/" />
-            <arg value="--log-junit=build/log/junit.xml" />
-            <arg value="--coverage-html=build/log/coverage" />
-            <arg value="--coverage-clover=build/log/coverage.xml" />
-        </exec>
-    </target>
-
-    <target name="metrics">
-        <exec command="bin/phpmd src xml codesize,cleancode,naming --reportfile build/log/pmd.xml">
-        </exec>
-
-        <exec command="${project.basedir}/bin/pdepend --jdepend-xml=${project.basedir}/build/log/jdepend.xml --jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg --overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg ${project.basedir}/src">
-        </exec>
-    </target>
-</project> -->
