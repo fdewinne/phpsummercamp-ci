@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class Prova extends AbstractMigration
+class BaseStructure extends AbstractMigration
 {
     /**
      * Change Method.

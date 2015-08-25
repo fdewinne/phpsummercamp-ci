@@ -10,7 +10,7 @@ class PostRepositoryTest extends PHPUnit_Extensions_Database_TestCase
 
     public function getConnection()
     {
-        $this->pdo = new \PDO('mysql:host=localhost;dbname=CIBlog_development', 'user', 'password');
+        $this->pdo = new \PDO('mysql:host=localhost;dbname=ci', 'summer', 'camp');
 
         return $this->createDefaultDBConnection($this->pdo);
     }

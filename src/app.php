@@ -22,7 +22,6 @@ $app['db'] = $app->share(function($app) {
     return new PDO('mysql:host=localhost;dbname=ci', 'summer', 'camp');
 });
 
-
 $app->get("/", function (Application $app) {
 
     $pr    = new PostRepository($app['db']);
