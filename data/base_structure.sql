@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `phinxlog`;
+
 DROP TABLE IF EXISTS `post`;
 
 CREATE TABLE `post` (
