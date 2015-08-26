@@ -20,6 +20,8 @@
         "robmorgan/phinx": "~0.4",
         "twig/twig": "~1",
         "symfony/twig-bridge": "~2.6",
+        "phing/phing": "~2.9",
+        "continuousphp/aws-sdk-phing": "~0.1",
         "monolog/monolog": "~1.13"
     },
     "require-dev": {
