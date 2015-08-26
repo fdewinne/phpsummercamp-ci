@@ -3,6 +3,6 @@ build/*
 logs/*.log
 /vendor/
 .vagrant/
-bin/.gitkeep
+/bin
 logs/*.log
 vendor/
