@@ -1,6 +1,8 @@
 CIBlog
 ==========
 
+[![Build Status](https://status.continuousphp.com/git-hub/fdewinne/phpsummercamp-ci?token=9470d3c3-0366-4e47-93fb-d36d8491e87d)](https://continuousphp.com/git-hub/fdewinne/phpsummercamp-ci)
+
 Una applicazione di esempio per mostrare come configurare una build con Jenkins
 
 workshop ci 2h
