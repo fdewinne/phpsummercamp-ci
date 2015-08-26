@@ -137,7 +137,7 @@
             <equals arg1="single-server" arg2="${cf.template}" />
             <then>
                 <aws-cf-runstack
-                        name="subsite-${cf.stackName}"
+                        name="phpsummercamp-${cf.stackName}"
                         updateOnConflict="true"
                         capabilities="CAPABILITY_IAM"
                         templatePath="./resources/cloudformation/${cf.template}.template">
@@ -147,7 +147,7 @@
             </then>
             <else>
                 <aws-cf-runstack
-                        name="subsite-${cf.stackName}"
+                        name="phpsummercamp-${cf.stackName}"
                         updateOnConflict="true"
                         capabilities="CAPABILITY_IAM"
                         templatePath="./resources/cloudformation/${cf.template}.template">
